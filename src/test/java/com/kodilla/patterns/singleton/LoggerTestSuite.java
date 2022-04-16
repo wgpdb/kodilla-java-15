@@ -11,7 +11,7 @@ public class LoggerTestSuite {
     @Test
     void testGetLastLog() {
         //Given
-        logger = Logger.INSTANCE;
+        logger = Logger.getInstance();
         logger.log("This is a log entry");
 
         //When
