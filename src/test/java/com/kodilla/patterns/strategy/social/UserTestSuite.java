@@ -55,13 +55,14 @@ public class UserTestSuite {
     @ParameterizedTest
     @MethodSource("provideUserForSharingStrategy")
     void sharingStrategyParametrizedTest(User user, String expected) {
+        assertEquals(expected, user.sharePost());
     }
 
     private static Stream<Arguments> provideUserForSharingStrategy() {
         return Stream.of(
                 arguments(new Millennial("John"), "share on snapchat [millennial]"),
                 arguments(new YGeneration("Adam"), "share on facebook [Y-generation]"),
-                arguments(new XGeneration("Anna"), "share on twitter [X-generation")
+                arguments(new XGeneration("Anna"), "share on twitter [X-generation]")
         );
     }
 }
