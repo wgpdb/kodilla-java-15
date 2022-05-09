@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static com.kodilla.patterns.factory.tasks.TaskFactory.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -18,7 +19,7 @@ public class TaskFactoryTestSuite {
         TaskFactory factory = new TaskFactory();
 
         //When
-        Task shopping = factory.completeTask(TaskFactory.SHOPPING);
+        Task shopping = factory.completeTask(SHOPPING);
         shopping.executeTask();
 
         //Then
@@ -32,7 +33,7 @@ public class TaskFactoryTestSuite {
         TaskFactory factory = new TaskFactory();
 
         //When
-        Task painting = factory.completeTask(TaskFactory.PAINTING);
+        Task painting = factory.completeTask(PAINTING);
         painting.executeTask();
 
         //Then
@@ -46,7 +47,7 @@ public class TaskFactoryTestSuite {
         TaskFactory factory = new TaskFactory();
 
         //When
-        Task driving = factory.completeTask(TaskFactory.DRIVING);
+        Task driving = factory.completeTask(DRIVING);
         driving.executeTask();
 
         //Then
@@ -56,15 +57,15 @@ public class TaskFactoryTestSuite {
 
     @ParameterizedTest
     @MethodSource("provideTask")
-    void taskFactoryParametrizedTest(Task task, String expected) {
-        assertEquals(expected, task.getTaskName());
+    void taskFactoryParametrizedTest(String taskName, String expected) {
+        assertEquals(expected, new TaskFactory().completeTask(taskName).getTaskName());
     }
 
     private static Stream<Arguments> provideTask() {
         return Stream.of(
-                arguments(new TaskFactory().completeTask(TaskFactory.SHOPPING), "go shopping"),
-                arguments(new TaskFactory().completeTask(TaskFactory.PAINTING), "repaint bedroom"),
-                arguments(new TaskFactory().completeTask(TaskFactory.DRIVING), "refuel")
+                arguments(SHOPPING, "go shopping"),
+                arguments(PAINTING, "repaint bedroom"),
+                arguments(DRIVING, "refuel")
         );
     }
 }
